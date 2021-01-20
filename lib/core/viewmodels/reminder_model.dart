@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moneymanager/core/enums/viewstate.dart';
-import 'package:moneymanager/core/services/notification_service.dart';
+// import 'package:moneymanager/core/services/notification_service.dart';
 import 'package:moneymanager/core/services/sharedprefs_service.dart';
 import 'package:moneymanager/core/viewmodels/base_model.dart';
 
@@ -8,8 +8,8 @@ import '../../locator.dart';
 
 // rreminder model
 class ReminderModel extends BaseModel {
-  final NotificationService _notificationService =
-      locator<NotificationService>();
+  // final NotificationService _notificationService =
+  //     locator<NotificationService>();
 
   final SharedPrefrencesService _sharedPrefrencesService =
       locator<SharedPrefrencesService>();
@@ -20,12 +20,12 @@ class ReminderModel extends BaseModel {
 
   void scheduleNotifaction() {
     if (selectedTime == null) return;
-    _notificationService.showNotificationDaily(
-        1,
-        'Money manager',
-        'Don\'t forget to record your expenses!',
-        selectedTime.hour,
-        selectedTime.minute);
+    // _notificationService.showNotificationDaily(
+    //     1,
+    //     'Money manager',
+    //     'Don\'t forget to record your expenses!',
+    //     selectedTime.hour,
+    //     selectedTime.minute);
   }
 
   pickTime(context) async {
