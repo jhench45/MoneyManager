@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:moneymanager/core/models/category.dart';
 import 'package:moneymanager/core/viewmodels/insert_transaction_model.dart';
+import 'package:moneymanager/models/authmodel.dart';
+import 'package:moneymanager/services/financeservice.dart';
 import 'package:moneymanager/ui/shared/app_colors.dart';
 import 'package:moneymanager/ui/shared/ui_helpers.dart';
 import 'package:moneymanager/ui/views/base_view.dart';
+import 'package:provider/provider.dart';
 
 class InsertTranscationView extends StatelessWidget {
   final Category category;
@@ -11,6 +14,7 @@ class InsertTranscationView extends StatelessWidget {
   InsertTranscationView(this.category, this.selectedCategory);
   @override
   Widget build(BuildContext context) {
+    print(category.name);
     return BaseView<InsertTransactionModel>(
       onModelReady: (model) => model.init(selectedCategory, category.index),
       builder: (context, model, child) => Scaffold(
@@ -73,7 +77,26 @@ class InsertTranscationView extends StatelessWidget {
                     color: backgroundColor,
                     textColor: Colors.black,
                     onPressed: () async {
-                      await model.addTransaction(context);
+                      var token = Provider.of<AuthModel>(context,listen:false).token;
+
+                      var types = ["income", "expense"]; 
+                      var cat = this.category.index;
+                      var mem = model.memoController.text;
+                      var amount = model.amountController.text;
+                      var date = model.selectedDate;
+                      var dateStr = date.toString().substring(0, 10);
+
+                      var newFResponse = await newFinance(token, {
+                        "type": types[this.selectedCategory - 1],
+                        "category": cat.toString(),
+                        "memo": mem,
+                        "amount": amount,
+                        "date": dateStr,
+                      });
+
+                      print(newFResponse);
+                      Navigator.pop(context);
+                      // await model.addTransaction(context);
                     },
                   ),
                 )

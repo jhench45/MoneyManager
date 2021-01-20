@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:moneymanager/core/services/notification_service.dart';
+// import 'package:moneymanager/core/services/notification_service.dart';
 import 'package:moneymanager/core/services/sharedprefs_service.dart';
 import 'package:moneymanager/core/viewmodels/details_model.dart';
 import 'package:moneymanager/core/viewmodels/edit_model.dart';
@@ -18,7 +18,7 @@ void setupLocator() {
   //!SERVICES
   locator.registerLazySingleton(() => CategoryIconService());
   locator.registerLazySingleton(() => MoorDatabaseService());
-  locator.registerLazySingleton(() => NotificationService());
+  // locator.registerLazySingleton(() => NotificationService());
   locator.registerLazySingleton(() => SharedPrefrencesService());
   //!VIEWMODELS
   locator.registerFactory(() => HomeModel());
